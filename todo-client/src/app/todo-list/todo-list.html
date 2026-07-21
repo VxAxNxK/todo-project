@@ -1,0 +1,18 @@
+<h2>Todo List</h2>
+
+<div>
+  <input [(ngModel)]="newTitle" placeholder="輸入新待辦事項" (keyup.enter)="addTodo()" />
+  <button (click)="addTodo()">新增</button>
+</div>
+
+<ul>
+  @for (todo of todos(); track todo.id) {
+    <li>
+      <input type="checkbox" [checked]="todo.isCompleted" (change)="toggleComplete(todo)" />
+      <span [class.done]="todo.isCompleted">{{ todo.title }}</span>
+      <button (click)="deleteTodo(todo.id)">刪除</button>
+    </li>
+  } @empty {
+    <li>目前沒有待辦事項</li>
+  }
+</ul>
