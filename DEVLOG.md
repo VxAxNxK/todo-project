@@ -83,3 +83,18 @@
     又在 working tree 把檔案搬到 `.claude/commands/devlog.md`（尚未 commit）。
 - 解法／學到：自訂 slash command 檔案要放在 `.claude/commands/<name>.md`，
   檔名就是指令名稱；下次新增指令記得一開始就放對資料夾。
+
+## 2026-07-22 — 完成 CategoryService(前端)+ 分類下拉選單
+- 做了什麼：
+  - 新增前端 `category.service.ts`，仿照 `TodoService` 提供分類的 CRUD
+    方法（get/create/update/delete）。
+  - `todo-list` 畫面加上分類下拉選單，載入分類清單並預設選第一筆；新增
+    待辦時改用選單選到的 `categoryId`（原本寫死 `1`）。
+  - 順手修正後端 `CategoryController.GetAll`：原本回傳空的 `Ok()`，沒有把
+    查到的資料包進去，導致前端其實拿不到分類清單；`TodoController.GetAll`
+    也一併統一改成用 `ApiResponse<T>.SuccessResponse(...)` 包裝回傳。
+- 卡關處：
+  - `CategoryController.GetAll` 忘記把 `_service.GetAllAsync()` 的結果放進
+    回傳值裡，是這次順便發現並修掉的 bug。
+- 解法／學到：新 Controller action 一律比照既有的 `ApiResponse<T>` 包裝
+  慣例來寫，避免又漏包資料。
