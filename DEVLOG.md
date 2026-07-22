@@ -21,14 +21,14 @@
   - 對應建立了 `TodoController` / `CategoryController`、`TodoService` /
     `CategoryService`、`TodoRepository` / `CategoryRepository`、`TodoDTO` /
     `CategoryDTO`，以及 `ApiResponse<T>` 統一回應格式。
-- 卡關處：(待補充)
+- 卡關處：無
 - 解法／學到：(待補充)
 
 ## 2026-06-08 — 幫 Todo 加上到期日欄位
 - 做了什麼：（依 EF Migration 推測）
   - 新增 migration `AddDueDateToTodo`，在 `Todos` 表加上可為 null 的
     `DueDate`（`datetime2`）欄位。
-- 卡關處：(待補充)
+- 卡關處：無
 - 解法／學到：(待補充)
 
 ## 2026-06-17 — 把到期日欄位拿掉
@@ -36,7 +36,7 @@
   - 新增 migration `DeleteTodoDueDate`，把六月八日才加的 `DueDate` 欄位砍掉。
   - 目前程式碼（`Todo.cs`、`TodoDTO`、前端 `models/todo.ts`）都已經完全沒有
     `DueDate` 的痕跡，看起來是確定不需要這個欄位而整個回退，不是改名或搬到別的地方。
-- 卡關處：(待補充)
+- 卡關處：無
 - 解法／學到：(待補充)
 
 ## （git 之前，確切日期不明）— 前端 Angular 專案 + JWT 驗證骨架
@@ -72,3 +72,14 @@
     名稱、變數型別都改成對應 `TodoService`。
 - 卡關處：(待補充)
 - 解法／學到：(待補充)
+
+## 2026-07-22 — 新增 /devlog 自訂指令
+- 做了什麼：
+  - 新增自訂 slash command，讓 Claude Code 裡輸入 `/devlog` 就能觸發：自動看
+    最新一筆 git commit，幫忙在 `DEVLOG.md` 補上一筆開發紀錄。
+- 卡關處：
+  - commit 當下把指令內容放在 `.claude/devlog.md`，但 Claude Code 的自訂指令
+    實際上要放在 `.claude/commands/` 資料夾底下才會被辨識，所以 commit 完後
+    又在 working tree 把檔案搬到 `.claude/commands/devlog.md`（尚未 commit）。
+- 解法／學到：自訂 slash command 檔案要放在 `.claude/commands/<name>.md`，
+  檔名就是指令名稱；下次新增指令記得一開始就放對資料夾。

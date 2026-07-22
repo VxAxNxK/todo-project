@@ -2,6 +2,12 @@
 
 <div>
   <input [(ngModel)]="newTitle" placeholder="輸入新待辦事項" (keyup.enter)="addTodo()" />
+  <label for="categorySelect">分類：</label>
+  <select id="categorySelect" [(ngModel)]="selectedCategoryId">
+    @for (category of categories(); track category.id) {
+      <option [ngValue]="category.id">{{ category.name }}</option>
+    }
+  </select>
   <button (click)="addTodo()">新增</button>
 </div>
 

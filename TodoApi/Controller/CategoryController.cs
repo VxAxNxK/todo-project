@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 namespace TodoApi.Controller;
-//using TodoApi.Models;
-//using TodoApi.Data;
+using TodoApi.Models;
 using TodoApi.Services;
 using TodoApi.DTOs;
 
@@ -20,7 +19,7 @@ public class CategoryController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetAll(){
         await _service.GetAllAsync();
-        return Ok();
+        return Ok(ApiResponse<List<CategoryDTO>>.SuccessResponse(await _service.GetAllAsync()));
     }
     
     // 新增

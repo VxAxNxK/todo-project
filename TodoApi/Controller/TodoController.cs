@@ -18,7 +18,10 @@ public class TodoController : ControllerBase
 
     [HttpGet]
     public async Task<ActionResult> GetAll()
-        => Ok(await _service.GetAllAsync());
+    {
+        var todos = await _service.GetAllAsync();
+        return Ok(ApiResponse<List<TodoDTO>>.SuccessResponse(todos));
+    }
     
     [HttpPost]
     public async Task<ActionResult> Create(TodoDTO todoDto){
